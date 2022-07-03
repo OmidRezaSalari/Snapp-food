@@ -1,0 +1,35 @@
+{
+    "name": "omidsalari/laravel-auth",
+    "description": "this package is basic authentication",
+    "keywords": [
+        "laravel",
+        "laravel-package"
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "OmidReza Salari",
+            "email": "omidsalari.dev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Authenticate\\": "src/",
+            "Authenticate\\Database\\Factories\\": "Database/Factories"
+        }
+    },
+    "autoload-dev": {
+        "AuthenticateTest\\": "tests/"
+    },
+    "require": {
+        "tymon/jwt-auth": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Authenticate\\Providers\\AuthServiceProvider"
+            ]
+        }
+    }
+}
