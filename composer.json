@@ -16,7 +16,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "omidsalari/laravel-auth": "*",
-        "omidsalari/snapp-food-deliver-system": "dev-develop"
+        "omidsalari/snapp-food-deliver-system": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

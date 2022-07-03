@@ -13,18 +13,18 @@
     }],
     "autoload": {
         "psr-4": {
-            "OrderDelay\\": "src/",
-            "OrderDelay\\Database\\Factories\\": "Database/Factories"
+            "DelayReport\\": "src/",
+            "DelayReport\\Database\\Factories\\": "Database/Factories"
         }
     },
     "autoload-dev": {
-        "OrderDelayTest\\": "tests/"
+        "DelayReportTest\\": "tests/"
     },
     "require": {},
     "extra": {
         "laravel": {
             "providers": [
-                "OrderDelay\\Providers\\OrderDelayServiceProvider"
+                "DelayReport\\Providers\\DelayReportServiceProvider"
             ]
         }
     }

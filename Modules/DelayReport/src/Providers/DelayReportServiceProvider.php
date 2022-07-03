@@ -1,13 +1,13 @@
 <?php
 
-namespace OrderDelay\Providers;
+namespace DelayReport\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class OrderDelayServiceProvider extends ServiceProvider
+class DelayReportServiceProvider extends ServiceProvider
 {
-    private $namespace = "OrderDelay\\Controllers";
+    private $namespace = "DelayReport\\Controllers";
 
     public function register()
     {
@@ -58,7 +58,7 @@ class OrderDelayServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'OrderDelayService');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'DelayReportService');
 
         if ($this->app->runningInConsole()) {
             $this->commands([]);

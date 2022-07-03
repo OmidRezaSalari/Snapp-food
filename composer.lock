@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97e185c8925fa4475c1ddfab0171e894",
+    "content-hash": "60617f73f0e04e33281d4ea785478110",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2207,7 +2207,7 @@
         },
         {
             "name": "omidsalari/laravel-auth",
-            "version": "dev-develop",
+            "version": "dev-add-migration",
             "dist": {
                 "type": "path",
                 "url": "./Modules/Auth",
@@ -2253,28 +2253,28 @@
         },
         {
             "name": "omidsalari/snapp-food-deliver-system",
-            "version": "dev-develop",
+            "version": "dev-add-migration",
             "dist": {
                 "type": "path",
-                "url": "./Modules/OrderDelay",
-                "reference": "50d25c972244f5b6849841f1ef61a1df1a0b93ff"
+                "url": "./Modules/DelayReport",
+                "reference": "c173e4bd7f0d552e1ede5e9868e6861859dc877b"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "OrderDelay\\Providers\\OrderDelayServiceProvider"
+                        "DelayReport\\Providers\\DelayReportServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "OrderDelay\\": "src/",
-                    "OrderDelay\\Database\\Factories\\": "Database/Factories"
+                    "DelayReport\\": "src/",
+                    "DelayReport\\Database\\Factories\\": "Database/Factories"
                 }
             },
             "autoload-dev": {
-                "OrderDelayTest\\": "tests/"
+                "DelayReportTest\\": "tests/"
             },
             "license": [
                 "MIT"
@@ -8289,9 +8289,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "omidsalari/snapp-food-deliver-system": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
