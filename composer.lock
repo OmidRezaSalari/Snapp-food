@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51feb23b859358ed9a96742cac02fe3b",
+    "content-hash": "97e185c8925fa4475c1ddfab0171e894",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2207,7 +2207,7 @@
         },
         {
             "name": "omidsalari/laravel-auth",
-            "version": "dev-master",
+            "version": "dev-develop",
             "dist": {
                 "type": "path",
                 "url": "./Modules/Auth",
@@ -2243,6 +2243,49 @@
                 }
             ],
             "description": "this package is basic authentication",
+            "keywords": [
+                "laravel",
+                "laravel-package"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "omidsalari/snapp-food-deliver-system",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "./Modules/OrderDelay",
+                "reference": "50d25c972244f5b6849841f1ef61a1df1a0b93ff"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OrderDelay\\Providers\\OrderDelayServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OrderDelay\\": "src/",
+                    "OrderDelay\\Database\\Factories\\": "Database/Factories"
+                }
+            },
+            "autoload-dev": {
+                "OrderDelayTest\\": "tests/"
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "OmidReza Salari",
+                    "email": "omidsalari.dev@gmail.com"
+                }
+            ],
+            "description": "this package for snapp food  deliver process",
             "keywords": [
                 "laravel",
                 "laravel-package"
@@ -8246,7 +8289,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "omidsalari/snapp-food-deliver-system": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

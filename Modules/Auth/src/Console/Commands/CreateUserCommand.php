@@ -4,23 +4,22 @@ namespace Authenticate\Console\Commands;
 
 use Authenticate\Repositories\User\UserProviderFacade;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
-class CreateParsPackUserCommand extends Command
+class CreateUserCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'parsPack:create';
+    protected $signature = 'user:create';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create ParsPack custom User';
+    protected $description = 'Create custom User';
 
     /**
      * Create a new command instance.
@@ -40,13 +39,12 @@ class CreateParsPackUserCommand extends Command
     public function handle()
     {
         UserProviderFacade::create([
-            "full-name" => "Pars pack company",
-            "username" => "parspack",
+            "full-name" => "Ananymous User ",
+            "username" => "Ananymous",
             "password" => bcrypt("123456"),
-            "api_token" => Str::random(100)
         ]);
 
-        $this->info("ParsPack user created!");
+        $this->info("Ananymous user created!");
 
         return 0;
     }

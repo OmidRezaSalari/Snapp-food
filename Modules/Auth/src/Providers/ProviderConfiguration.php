@@ -2,7 +2,7 @@
 
 namespace Authenticate\Providers;
 
-use Authenticate\Console\Commands\CreateParsPackUserCommand;
+use Authenticate\Console\Commands\CreateUserCommand;
 use Authenticate\Facades\ResponderFacade;
 use Authenticate\Facades\AuthFacade;
 use Authenticate\Facades\BaseAuth;
@@ -75,7 +75,7 @@ trait ProviderConfiguration
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                CreateParsPackUserCommand::class,
+                CreateUserCommand::class,
             ]);
         }
     }

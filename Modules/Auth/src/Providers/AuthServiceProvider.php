@@ -22,4 +22,6 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->loadings();
     }
+
+    
 }
