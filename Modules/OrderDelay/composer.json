@@ -1,0 +1,31 @@
+{
+    "name": "omidsalari/snapp-food-deliver-system",
+    "description": "this package for snapp food  deliver process",
+    "keywords": [
+        "laravel",
+        "laravel-package"
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [{
+        "name": "OmidReza Salari",
+        "email": "omidsalari.dev@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "OrderDelay\\": "src/",
+            "OrderDelay\\Database\\Factories\\": "Database/Factories"
+        }
+    },
+    "autoload-dev": {
+        "OrderDelayTest\\": "tests/"
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OrderDelay\\Providers\\OrderDelayServiceProvider"
+            ]
+        }
+    }
+}
