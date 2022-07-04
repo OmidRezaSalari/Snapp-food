@@ -20,7 +20,7 @@ class CreateDelayReportsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('agent_id')->nullable();
             $table->foreign('agent_id')->references('id')->on('agents');
 
             $table->set("status", ['DELAY', "REVIEW", "PICKED", "PURSUED"])->default("DELAY");

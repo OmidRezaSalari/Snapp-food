@@ -20,8 +20,8 @@ class CreateTripsTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')
                 ->onUpdate('cascade');
 
-            $table->unsignedBigInteger('postman_id')->unique();
-            $table->foreign('postman_id')->references('postman_id')->on('postmans')
+            $table->unsignedBigInteger('delivery_id')->unique();
+            $table->foreign('delivery_id')->references('id')->on('deliveries')
                 ->onUpdate('cascade');
 
             $table->set("status", ['ASSIGNED', "VENDOR_AT", "PICKED", "DELIVERED"]);
