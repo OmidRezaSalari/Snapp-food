@@ -19,7 +19,7 @@ class TripProvider
     /**
      * Get deliverd order that exist in trips and with deliverd status.
      *
-     * @param integer $orderId
+     * @param int $orderId
      * 
      * @return Trip|null
      */
@@ -32,7 +32,7 @@ class TripProvider
     /**
      * Get inprocess order that exist in trips
      *
-     * @param integer $orderId
+     * @param int $orderId
      * 
      * @return Trip|null
      */
@@ -44,7 +44,7 @@ class TripProvider
     /**
      * Get deliverd order that exist in trips and with deliverd status.
      *
-     * @param integer $orderId
+     * @param int $orderId
      * 
      * @return Trip|null
      */

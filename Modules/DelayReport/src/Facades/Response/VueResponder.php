@@ -7,11 +7,11 @@ use Illuminate\Http\Response;
 
 class VueResponder
 {
-    const HTTP_SUCCESS_CODE = 200;
-    const HTTP_CLIENT_ERROR_CODE = 400;
-    const HTTP_SERVER_ERROR_CODE = 500;
+    public const HTTP_SUCCESS_CODE = 200;
+    public const HTTP_CLIENT_ERROR_CODE = 400;
+    public const HTTP_SERVER_ERROR_CODE = 500;
 
-    const ERROR_KEYS = ['status', 'developerMessage', 'userMessage', 'errorCode', 'moreInfo'];
+    public const ERROR_KEYS = ['status', 'developerMessage', 'userMessage', 'errorCode', 'moreInfo'];
 
     /**
      * Create message For send error
