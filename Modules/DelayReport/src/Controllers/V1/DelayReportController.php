@@ -17,14 +17,15 @@ class DelayReportController extends Controller
         try {
             $validData = $request->validated();
 
+
             TripProviderFacade::isValidTrip($validData["orderId"]);
 
             $message = TripHandlerFacade::handle($validData["orderId"]);
 
             return ResponderFacade::addReportSuccessfully($message);
-        } catch (Exception $exception) {
 
-            ResponderFacade::sendServerError($$exception->message)->throwResponse();
+        } catch (Exception $exception) {
+            ResponderFacade::sendServerError($exception->getMessage())->throwResponse();
         }
     }
 }
