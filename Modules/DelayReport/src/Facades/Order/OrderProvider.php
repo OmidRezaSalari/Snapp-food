@@ -18,7 +18,7 @@ class OrderProvider
     /**
      * check this order has valid delivery time
      *
-     * @param string $orderId order unqiue ID
+     * @param int $orderId order unqiue ID
      * 
      * @return boolean
      */
@@ -43,5 +43,17 @@ class OrderProvider
         $this->order->where('id', $orderId)->update($data);
 
         return true;
+    }
+
+    /**
+     * get Order by id
+     *
+     * @param int $orderId order unqiue ID
+     * 
+     * @return Order|null
+     */
+    public function getById(int $orderId)
+    {
+        return $this->order->where('id', $orderId)->first();
     }
 }

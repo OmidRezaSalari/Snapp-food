@@ -25,25 +25,22 @@ class AddDelayReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'orderId' => 'required',
-            // 'password' => 'required|string|numeric|min:6'
+            'orderId' => 'required|integer|exists:orders,id|min:1'
         ];
     }
 
     public function attributes()
     {
         return [
-            "username" => "نام کاربری",
-            "password" => "کلمه عبور"
+            "orderId" => "شناسه سفارش"
         ];
     }
 
     public function messages()
     {
         return [
-            'username.exists' => __(
-                "authService::client-error.user-access-denied",
-                ['username' => $this->username]
+            'orderId.exists' => __(
+                "DelayReportService::client-error.order-access-denied"
             )
         ];
     }

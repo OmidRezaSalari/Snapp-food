@@ -67,8 +67,8 @@ class VueResponder
         $message = $this->createErrorMessage(
             __('DelayReportService::server-error.time-delivery-not-exceed'),
             __('DelayReportService::client-error.time-delivery-not-exceed'),
-            Response::HTTP_FORBIDDEN,
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_FORBIDDEN
         );
         return response()->json($message);
     }
@@ -99,6 +99,42 @@ class VueResponder
             ],
             self::HTTP_SUCCESS_CODE
         );
+    }
+    /** 
+     * send response when delay report assign to a agent
+     * 
+     * @return JsonResponse
+     */
+    public function accessToAgentSuccessfully()
+    {
+        return response()->json(
+            [
+                'status' => self::HTTP_SUCCESS_CODE,
+                'message' => __(
+                    'DelayReportService::message.access-to-agent',
+                )
+            ],
+            self::HTTP_SUCCESS_CODE
+        );
+    }
+
+    /**
+     * when delay queue is empty
+     *
+     * @param int $agent busy agent id
+     *
+     * @return JsonResponse
+     */
+    public function agentIsBusy(int $agentID)
+    {
+        $message = $this->createErrorMessage(
+            __('DelayReportService::server-error.agent-is-busy', ['id' => $agentID]),
+            __('DelayReportService::client-error.agent-is-busy'),
+            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_FORBIDDEN
+        );
+
+        return response()->json($message);
     }
 
     /**

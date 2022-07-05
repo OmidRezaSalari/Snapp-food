@@ -48,7 +48,7 @@ class Rabbitmq
      * receive message from delay queue.
      * 
      * 
-     * @return string|JsonResponse
+     * @return string|null
      */
     public function received()
     {
@@ -66,9 +66,11 @@ class Rabbitmq
 
         $channel->queue_bind($queue[0], $this->exchangeName, $this->severity);
 
-        $callback = function ($msg) {
 
-            echo $msg->body;
+        $message = null;
+        $callback = function ($msg)  use (&$message) {
+
+            $message = $msg->body;
             $msg->ack();
         };
 
@@ -80,10 +82,12 @@ class Rabbitmq
 
         if ($channel->basic_get($queue[0])) {
             $channel->wait();
-        } else {
 
-            return ResponderFacade::queueIsEmpty();
-        }
+            return intval($message);
+        } 
+
+          return $message;
+        
 
         $channel->close();
         $connection->close();

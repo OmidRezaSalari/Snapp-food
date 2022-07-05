@@ -17,6 +17,7 @@ use DelayReport\Facades\Response\VueResponder;
 use DelayReport\Facades\Response\ResponderFacade;
 use DelayReport\Facades\Trip\TripProvider;
 use DelayReport\Facades\Trip\TripProviderFacade;
+use DelayReport\Middleware\BusyAgent;
 use DelayReport\Middleware\IsValidDeliveryTime;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
@@ -79,7 +80,7 @@ class DelayReportServiceProvider extends ServiceProvider
         app()->bind("AMQPMessage", function ($app, $message) {
 
             $deliveryMode = config('delivery.delivery_mode');
-            return new AMQPMessage(json_encode($message[0]), array('delivery_mode' => $deliveryMode));
+            return new AMQPMessage($message[0], array('delivery_mode' => $deliveryMode));
         });
     }
 
@@ -120,6 +121,7 @@ class DelayReportServiceProvider extends ServiceProvider
     private function loadings(): void
     {
         app(Router::class)->aliasMiddleware('validDeliveryTime', IsValidDeliveryTime::class);
+        app(Router::class)->aliasMiddleware('isBusyAgent', BusyAgent::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 
