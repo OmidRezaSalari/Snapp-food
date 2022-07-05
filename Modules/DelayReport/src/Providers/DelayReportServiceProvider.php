@@ -6,6 +6,8 @@ use DelayReport\Facades\DelayReport\DelayReportProvider;
 use DelayReport\Facades\DelayReport\DelayReportProviderFacade;
 use DelayReport\Facades\DeliveryTime\DeliveryTimeProvider;
 use DelayReport\Facades\DeliveryTime\DeliveryTimeProviderFacade;
+use DelayReport\Facades\Message\MessageSenderFacade;
+use DelayReport\Facades\Message\Rabbitmq;
 use DelayReport\Facades\TripHandler\TripHandlerFacade;
 use DelayReport\Facades\TripHandler\DeliverdTripHandler;
 use DelayReport\Facades\TripHandler\InProcessTripHandler;
@@ -19,6 +21,8 @@ use DelayReport\Middleware\IsValidDeliveryTime;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 
 class DelayReportServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,8 @@ class DelayReportServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . "/../config/delivery.php", "delivery");
+
+        $this->messageBrokerConfig();
 
         OrderProviderFacade::shouldProxyTo(OrderProvider::class);
         TripProviderFacade::shouldProxyTo(TripProvider::class);
@@ -43,6 +49,8 @@ class DelayReportServiceProvider extends ServiceProvider
         DeliveryTimeProviderFacade::shouldProxyTo(DeliveryTimeProvider::class);
         ResponderFacade::shouldProxyTo(VueResponder::class);
         DelayReportProviderFacade::shouldProxyTo(DelayReportProvider::class);
+
+        MessageSenderFacade::shouldProxyTo(Rabbitmq::class);
     }
 
     public function boot()
@@ -55,6 +63,24 @@ class DelayReportServiceProvider extends ServiceProvider
         $this->publish();
     }
 
+
+    public function messageBrokerConfig()
+    {
+
+        app()->singleton("AMQPStreamConnection", function () {
+            $host = config('delivery.rabbitmq_host');
+            $port = config('delivery.rabbitmq_port');
+            $username = config('delivery.rabbitmq_username');
+            $password = config('delivery.rabbitmq_password');
+
+            return new AMQPStreamConnection($host, $port, $username, $password);
+        });
+
+        app()->singleton("AMQPMessage", function ($app, $message) {
+            $deliveryMode = config('delivery.delivery_mode');
+            return new AMQPMessage(json_encode($message), array('delivery_mode' => $deliveryMode));
+        });
+    }
 
     /**
      * Register service routes.
