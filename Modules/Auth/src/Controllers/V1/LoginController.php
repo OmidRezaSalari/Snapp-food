@@ -5,11 +5,8 @@ namespace Authenticate\Controllers\V1;
 use App\Http\Controllers\Controller;
 use Authenticate\Facades\AuthFacade;
 use Authenticate\Facades\ResponderFacade;
-use Authenticate\Repositories\User\UserProviderFacade;
 use Authenticate\Requests\UserLoginRequest;
 use Illuminate\Http\JsonResponse;
-
-use Exception;
 
 class LoginController extends Controller
 {
