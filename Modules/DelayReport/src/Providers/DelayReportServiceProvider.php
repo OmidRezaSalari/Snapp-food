@@ -76,9 +76,10 @@ class DelayReportServiceProvider extends ServiceProvider
             return new AMQPStreamConnection($host, $port, $username, $password);
         });
 
-        app()->singleton("AMQPMessage", function ($app, $message) {
+        app()->bind("AMQPMessage", function ($app, $message) {
+
             $deliveryMode = config('delivery.delivery_mode');
-            return new AMQPMessage(json_encode($message), array('delivery_mode' => $deliveryMode));
+            return new AMQPMessage(json_encode($message[0]), array('delivery_mode' => $deliveryMode));
         });
     }
 
@@ -118,7 +119,7 @@ class DelayReportServiceProvider extends ServiceProvider
      */
     private function loadings(): void
     {
-        app(Router::class)->aliasMiddleware('isValidDeliveryTime', IsValidDeliveryTime::class);
+        app(Router::class)->aliasMiddleware('validDeliveryTime', IsValidDeliveryTime::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
 

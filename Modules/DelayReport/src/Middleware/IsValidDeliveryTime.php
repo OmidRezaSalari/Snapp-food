@@ -4,6 +4,7 @@ namespace DelayReport\Middleware;
 
 use Closure;
 use DelayReport\Facades\Order\OrderProviderFacade;
+use DelayReport\Facades\Response\ResponderFacade;
 
 class IsValidDeliveryTime
 {
@@ -11,7 +12,7 @@ class IsValidDeliveryTime
     {
         if (!OrderProviderFacade::isValidDeliveryTime($request['orderId'])) {
 
-            return response()->json("not valid");
+            return ResponderFacade::time_delivery_not_exceed();
         }
 
         return $next($request);

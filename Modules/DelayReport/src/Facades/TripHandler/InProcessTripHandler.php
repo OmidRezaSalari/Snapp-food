@@ -11,7 +11,6 @@ class InProcessTripHandler
 
     public function handle($orderId)
     {
-
         $PredictTime = DeliveryTimeProviderFacade::refresh();
 
         OrderProviderFacade::update(

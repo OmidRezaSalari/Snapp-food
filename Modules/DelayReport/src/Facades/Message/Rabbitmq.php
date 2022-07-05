@@ -2,6 +2,9 @@
 
 namespace DelayReport\Facades\Message;
 
+use DelayReport\Facades\Response\ResponderFacade;
+use Illuminate\Http\JsonResponse;
+
 class Rabbitmq
 {
 
@@ -17,18 +20,21 @@ class Rabbitmq
     /**
      * send message to rabbitmq queue
      * 
-     * @param string|array $message  the content should be send
+     * @param mixed $message  the content should be send
      * 
-     * @return bool
+     * @return void
      */
 
     public function send($message)
     {
         $connection = resolve("AMQPStreamConnection");
 
+
         $channel = $connection->channel();
 
+
         $channel->exchange_declare($this->exchangeName, $this->exchangeType, false, false, false);
+
 
         $msg = resolve("AMQPMessage", [$message]);
 
@@ -36,17 +42,22 @@ class Rabbitmq
 
         $channel->close();
         $connection->close();
-
-        return true;
     }
 
-
-    public function recieved()
+    /**
+     * receive message from delay queue.
+     * 
+     * 
+     * @return string|JsonResponse
+     */
+    public function received()
     {
 
-        $connection = app("AMQPStreamConnection");
+        $connection = resolve("AMQPStreamConnection");
+
 
         $channel = $connection->channel();
+
 
         $channel->exchange_declare($this->exchangeName, $this->exchangeType, false, false, false);
 
@@ -56,7 +67,8 @@ class Rabbitmq
         $channel->queue_bind($queue[0], $this->exchangeName, $this->severity);
 
         $callback = function ($msg) {
-            echo $msg->body . "\n";
+
+            echo $msg->body;
             $msg->ack();
         };
 
@@ -70,15 +82,10 @@ class Rabbitmq
             $channel->wait();
         } else {
 
-            // send response;
-            dd("rad shod");
+            return ResponderFacade::queueIsEmpty();
         }
-
-
 
         $channel->close();
         $connection->close();
-
-        return 1;
     }
 }

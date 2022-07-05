@@ -54,6 +54,53 @@ class VueResponder
         return response()->json($message);
     }
 
+
+    /**
+     * When order time delivery don't exceed it's delivery time.
+     *
+     *
+     * @return JsonResponse
+     */
+
+    public function time_delivery_not_exceed()
+    {
+        $message = $this->createErrorMessage(
+            __('DelayReportService::server-error.time-delivery-not-exceed'),
+            __('DelayReportService::client-error.time-delivery-not-exceed'),
+            Response::HTTP_FORBIDDEN,
+            Response::HTTP_BAD_REQUEST
+        );
+        return response()->json($message);
+    }
+
+    /**
+     * when delay queue is empty
+     *
+     *
+     * @return JsonResponse
+     */
+    public function queueIsEmpty()
+    {
+        return response()->json(
+            [
+                'status' => self::HTTP_SUCCESS_CODE,
+                'message' => __('DelayReportService::client-error.delay-queue-is-empty')
+            ],
+            self::HTTP_SUCCESS_CODE
+        );
+    }
+
+    public function addReportSuccessfully($message)
+    {
+        return response()->json(
+            [
+                'status' => self::HTTP_SUCCESS_CODE,
+                'message' => $message
+            ],
+            self::HTTP_SUCCESS_CODE
+        );
+    }
+
     /**
      * Send an error when a server error  occurs
      *
