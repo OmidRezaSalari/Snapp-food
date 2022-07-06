@@ -15,7 +15,7 @@ use Exception;
 class DelayReportController extends Controller
 {
 
-    public function addReport(AddDelayReportRequest $request)
+    public function addDelayReport(AddDelayReportRequest $request)
     {
         try {
             $validData = $request->validated();

@@ -4,7 +4,7 @@ Route::group(["middleware" => ["auth:api"], 'prefix' => 'v1/', 'namespace' => 'V
 
     Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
 
-        Route::post('delays/reports', "DelayReportController@addReport")
+        Route::post('delays/reports', "DelayReportController@addDelayReport")
             ->name("add-delay-report")->middleware("validDeliveryTime");
 
         Route::post('/reviews', "DelayReportController@sendForReview")

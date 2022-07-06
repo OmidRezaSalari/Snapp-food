@@ -12,7 +12,7 @@ class CreateUserCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'user:create';
+    protected $signature = 'dummy:user';
 
     /**
      * The console command description.
@@ -39,8 +39,8 @@ class CreateUserCommand extends Command
     public function handle()
     {
         UserProviderFacade::create([
-            "full-name" => "Ananymous User ",
-            "username" => "Ananymous",
+            "full-name" => "dummy dummy",
+            "username" => "dummy",
             "password" => bcrypt("123456"),
         ]);
 
