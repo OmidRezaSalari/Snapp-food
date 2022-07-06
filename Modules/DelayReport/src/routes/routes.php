@@ -1,12 +1,17 @@
 <?php
 
-Route::group(["middleware" => ["auth:api"], 'prefix' => 'v1/orders', 'namespace' => 'V1', 'as' => 'v1.orders.'], function () {
+Route::group(["middleware" => ["auth:api"], 'prefix' => 'v1/', 'namespace' => 'V1', 'as' => "v1."], function () {
 
-    Route::group(['middleware' => ["validDeliveryTime"], 'prefix' => '/delays', 'as' => 'delays.'], function () {
-        Route::post('/reports', "DelayReportController@addReport")
-            ->name("add-new-report");
+    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+
+        Route::post('delays/reports', "DelayReportController@addReport")
+            ->name("add-delay-report")->middleware("validDeliveryTime");
+
+        Route::post('/reviews', "DelayReportController@sendForReview")
+            ->name("forReviews")->middleware("isBusyAgent");
     });
 
-    Route::post('/reviews', "DelayReportController@sendForReview")->middleware("isBusyAgent")
-        ->name("forReviews");
+    Route::group(["middleware" => ["auth:api"], 'prefix' => 'vendors', 'as' => 'vendors.'], function () {
+        Route::get('/', "DelayReportController@vendorsDelayReportCount");
+    });
 });

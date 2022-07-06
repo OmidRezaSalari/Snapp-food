@@ -90,6 +90,28 @@ class VueResponder
         );
     }
 
+
+    /**
+     * Send vendors model data.
+     *
+     * @param array $vendors .
+     *
+     * @return JsonResponse
+     */
+    public function vendors($vendors): JsonResponse
+    {
+        return response()->json(
+            [
+                'status' => self::HTTP_SUCCESS_CODE,
+                'body' => $vendors
+            ],
+            self::HTTP_SUCCESS_CODE
+        );
+    }
+
+
+
+
     public function addReportSuccessfully($message)
     {
         return response()->json(
