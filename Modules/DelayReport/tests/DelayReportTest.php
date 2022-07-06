@@ -47,7 +47,7 @@ class AuthenticateTest extends TestCase
             ->with($message)->once()
             ->andReturn(response()->json(["message" => $message]));
 
-        $res = $this->postJson(route('v1.orders.delays.add-new-report'), ['orderId' => $orderId]);
+        $res = $this->postJson(route('v1.orders.add-delay-report'), ['orderId' => $orderId]);
 
         $res->assertSuccessful()->assertJsonFragment(["message" => $message]);
     }
@@ -77,7 +77,7 @@ class AuthenticateTest extends TestCase
             ->with($message)->once()
             ->andReturn(response()->json(["message" => $message]));
 
-        $res = $this->postJson(route('v1.orders.delays.add-new-report'), ['orderId' => $orderId]);
+        $res = $this->postJson(route('v1.orders.add-delay-report'), ['orderId' => $orderId]);
 
         $res->assertSuccessful()->assertJsonFragment(["message" => $message]);
     }
@@ -101,7 +101,7 @@ class AuthenticateTest extends TestCase
     }
 
     /** @test */
-    public function when_queue_is_empty_when_assign_delay_report_to_agent()
+    public function queue_is_empty_when_assign_delay_report_to_agent()
     {
 
         MessageSenderFacade::shouldReceive("received")->withNoArgs()->once()->andReturnNull();
