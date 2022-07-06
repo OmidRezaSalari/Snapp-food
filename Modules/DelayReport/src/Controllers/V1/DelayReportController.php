@@ -8,6 +8,7 @@ use DelayReport\Facades\Message\MessageSenderFacade;
 use DelayReport\Facades\Response\ResponderFacade;
 use DelayReport\Facades\TripHandler\TripHandlerFacade;
 use DelayReport\Facades\Trip\TripProviderFacade;
+use DelayReport\Facades\Vendor\VendorProviderFacade;
 use DelayReport\Requests\V1\AddDelayReportRequest;
 use Exception;
 
@@ -39,6 +40,19 @@ class DelayReportController extends Controller
             }
 
             return ResponderFacade::queueIsEmpty();
+        } catch (Exception $exception) {
+            ResponderFacade::sendServerError($exception->getMessage())->throwResponse();
+        }
+    }
+
+    public function vendorsDelayReportCount()
+    {
+        try {
+
+            $vendors = VendorProviderFacade::getWithDelayReportCount();
+            
+            return ResponderFacade::vendors($vendors);
+
         } catch (Exception $exception) {
             ResponderFacade::sendServerError($exception->getMessage())->throwResponse();
         }

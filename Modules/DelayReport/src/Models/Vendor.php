@@ -18,8 +18,17 @@ class Vendor extends Model
         return VendorFactory::new();
     }
 
-    public function orders(){
+    public function orders()
+    {
 
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get all of the delay reports for the vendor.
+     */
+    public function delayReports()
+    {
+        return $this->hasManyThrough(DelayReport::class, Order::class);
     }
 }

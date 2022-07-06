@@ -17,6 +17,8 @@ use DelayReport\Facades\Response\VueResponder;
 use DelayReport\Facades\Response\ResponderFacade;
 use DelayReport\Facades\Trip\TripProvider;
 use DelayReport\Facades\Trip\TripProviderFacade;
+use DelayReport\Facades\Vendor\VendorProvider;
+use DelayReport\Facades\Vendor\VendorProviderFacade;
 use DelayReport\Middleware\BusyAgent;
 use DelayReport\Middleware\IsValidDeliveryTime;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +54,7 @@ class DelayReportServiceProvider extends ServiceProvider
         DelayReportProviderFacade::shouldProxyTo(DelayReportProvider::class);
 
         MessageSenderFacade::shouldProxyTo(Rabbitmq::class);
+        VendorProviderFacade::shouldProxyTo(VendorProvider::class);
     }
 
     public function boot()
