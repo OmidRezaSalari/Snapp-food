@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-
   app:
     image: bitnami/php-fpm:7.4.28
     container_name: app
@@ -9,9 +8,9 @@ services:
     working_dir: /app
     depends_on:
       - mariadb-server
+      - rabbitmq
     environment:
       - DB_HOST=mariadb-server
-      - REDIS_HOST=redis-server
       - REDIS_PASSWORD=secret
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel
@@ -41,6 +40,19 @@ services:
       - "3308:3306"
     networks:
       - app
+
+  rabbitmq:
+    container_name: "rabbitmq"
+    image: rabbitmq:3.8-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - app
+
   phpmyadmin:
     image: bitnami/phpmyadmin:5.1.3
     container_name: phpmyadmin
@@ -54,11 +66,11 @@ services:
       - DATABASE_HOST=mariadb-server
     networks:
       - app
+
 volumes:
   db-data:
 
 
 networks:
-
   app:
     name: app_network
