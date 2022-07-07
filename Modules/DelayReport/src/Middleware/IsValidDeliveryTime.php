@@ -10,7 +10,7 @@ class IsValidDeliveryTime
 {
     public function handle($request, Closure $next)
     {
-        if (!OrderProviderFacade::isValidDeliveryTime($request['orderId'])) {
+        if ($request['orderId'] && !OrderProviderFacade::isValidDeliveryTime($request['orderId'])) {
 
             return ResponderFacade::time_delivery_not_exceed();
         }
